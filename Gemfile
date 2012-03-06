@@ -4,4 +4,5 @@ gem 'geminabox'
 gem 'unicorn'
 
 gem 'capistrano'
+gem 'rake'
 
