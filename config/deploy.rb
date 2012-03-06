@@ -18,6 +18,7 @@ role :db,  "schnecke", :primary => true
 set :deploy_to, "/var/www/roots/#{application}/"
 
 set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+set :normalize_asset_timestamps, false
 
 namespace :deploy do
   task :start, :roles => :app, :except => { :no_release => true } do 
