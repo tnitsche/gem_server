@@ -1,1 +1,17 @@
 Private gem server based on geminabox
+
+Install
+
+  git@github.com:tnitsche/gem_server.git
+  bundle install --path .bundle
+
+For local usage
+
+  bundle exec rake init
+  bundle exec rake gem_server:start
+
+For remote deploy
+
+  bundle exe cap deploy
+
+
