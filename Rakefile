@@ -35,5 +35,29 @@ namespace :init do
       end
     end
   end
-
 end
+
+namespace :gem_server do
+  desc 'start gem server'
+  task :start do
+    sh "bundle exec unicorn -c ./config/unicorn.rb -D -E production"
+  end
+
+  desc 'stop gem server'
+  task :stop do
+    sh %{ kill `cat tmp/pids/unicorn.pid` }
+  end
+
+
+  desc 'restart gem server'
+  task :restart do
+    Rake::Task["gem_server:stop"].execute
+    Rake::Task["gem_server:start"].execute
+  end
+
+  desc 'reload gem server'
+  task :reload do
+    sh %{ kill -s USR2 `cat tmp/pids/unicorn.pid` }
+  end
+
+end 
