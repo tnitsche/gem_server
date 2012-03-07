@@ -7,7 +7,7 @@ set -e
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/var/www/roots/gem_server/current
 PID=$APP_ROOT/tmp/pids/unicorn.pid
-CMD="/usr/bin/unicorn -D -c $APP_ROOT/config/unicorn.rb"
+CMD="bundle exec unicorn -c $APP_ROOT/config/unicorn.rb -D -E production"
 action="$1"
 set -u
 
