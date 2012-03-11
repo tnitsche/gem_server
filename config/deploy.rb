@@ -21,18 +21,27 @@ set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 set :normalize_asset_timestamps, false
 
 namespace :deploy do
+  desc "Start gem server"
   task :start, :roles => :app, :except => { :no_release => true } do 
     run "cd #{current_path} ; bundle exec unicorn -c #{current_path}/config/unicorn.rb -D -E #{rack_env};"
   end
+
+  desc "Stop gem server"
   task :stop, :roles => :app, :except => { :no_release => true } do 
     run "#{try_sudo} kill `cat #{unicorn_pid}`"
   end
+
+  desc "Gracefully stop gem server"
   task :graceful_stop, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} kill -s QUIT `cat #{unicorn_pid}`"
   end
+
+  desc "Reload (config, code) gem server"
   task :reload, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} kill -s USR2 `cat #{unicorn_pid}`"
   end
+
+  desc "Restart gem server"
   task :restart, :roles => :app, :except => { :no_release => true } do
     stop
     start
